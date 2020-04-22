@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  api_Blog:
+    build:
+      context: ..
+      dockerfile: build/Dockerfile.api
+    depends_on:
+      - postgres
+    environment:
+      - BLOG_DATABASE_URL=psql://Blog:Blog@postgres:5432/Blog
+    ports:
+      - "8000:8000"
+  postgres:
+    image: postgres:latest
+    volumes:
+      - "Blog-pgdata:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_DB=Blog
+      - POSTGRES_USER=Blog
+      - POSTGRES_PASSWORD=Blog
+    ports:
+      - "5432:5432"
+  # redis:
+  #   image: redis:latest
+  # elastic:
+  #   image: elasticsearch:7.2.0
+  #   volumes:
+  #     - "Blog-elasticdata:/usr/share/elasticsearch/data"
+  #   environment:
+  #     - discovery.type=single-node
+  #   ports:
+  #     - "9200:9200"
+  #     - "9300:9200"
+
+volumes:
+  Blog-pgdata:
+  Blog-elasticdata:
