@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # our apps
     "Blog.apps.common.apps.CommonConfig",
     "Blog.apps.account.apps.AccountConfig",
+    "Blog.apps.blog.apps.BlogConfig"
 ] + env.list("BLOG_DEV_INSTALLED_APPS", default=[])
 
 MIDDLEWARE = [
